@@ -1,0 +1,11 @@
+/* styles.css */
+
+a:hover {
+    text-decoration: underline;
+}
+
+img:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: transform 0.2s;
+}
