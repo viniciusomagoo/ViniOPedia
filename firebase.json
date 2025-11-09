@@ -1,0 +1,68 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "rewrites": [
+      {
+        "source": "/sobre",
+        "destination": "/Sobre/index.html"
+      },
+      {
+        "source": "/",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|svg|webp)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(css|js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=604800"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(html)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=0, must-revalidate"
+          }
+        ]
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/index.html",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "source": "/Sobre/index.html",
+        "destination": "/sobre",
+        "type": 301
+      },
+      {
+        "source": "/sobre.html",
+        "destination": "/sobre",
+        "type": 301
+      }
+    ]
+  }
+}

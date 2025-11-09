@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conheça a ViniOPédia - A wikipédia mais aleatória da internet! Saiba mais sobre nosso projeto e missão.">
+    <meta name="keywords" content="sobre, ViniOPédia, projeto, missão">
+    <meta name="author" content="ViniOPédia">
+    <meta name="theme-color" content="#667eea">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sobre - ViniOPédia">
+    <meta property="og:description" content="Conheça a ViniOPédia - A wikipédia mais aleatória da internet!">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sobre - ViniOPédia">
+    <meta name="twitter:description" content="Conheça a ViniOPédia - A wikipédia mais aleatória da internet!">
+    
+    <title>Sobre - ViniOPédia</title>
+    
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    
+    <link rel="stylesheet" href="sobre.css">
+    
+    <link rel="preload" href="sobre.js" as="script">
+</head>
+
+<body>
+    <div id="ui">
+        <nav id="above" role="navigation" aria-label="Navegação principal">
+            <a href="/" class="logo-link" aria-label="Página inicial da ViniOPédia">
+                <span class="logo-text">ViniOPédia</span>
+            </a>
+            <a id="about-link" href="/sobre" aria-current="page" aria-label="Sobre a ViniOPédia">Sobre</a>
+        </nav>
+
+        <main role="main" class="about-main">
+            <div class="about-container">
+                <section class="hero-section">
+                    <h1 class="about-title">Sobre a ViniOPédia</h1>
+                    <p class="about-subtitle">A wikipédia mais aleatória da internet! 🎲</p>
+                </section>
+
+                <section class="content-section">
+                    <div class="section-icon">🎯</div>
+                    <h2>Nossa Missão</h2>
+                    <p>Criar uma enciclopédia para você, nerd, </p>
+                </section>
+
+                <section class="content-section">
+                    <div class="section-icon">📚</div>
+                    <h2>Q: O que é a ViniOPédia?</h2>
+                    <p>A: A ViniOPédia não é bem uma wikipédia, é tipo uma wikipédia com cultura geek.</p>
+                </section>
+
+                <section class="content-section features-section">
+                    <div class="section-icon">✨</div>
+                    <h2>Recursos</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🔍</div>
+                            <h3>Busca Inteligente</h3>
+                            <p>Encontre qualquer artigo rapidamente com nossa busca avançada em tempo real.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📱</div>
+                            <h3>Responsivo</h3>
+                            <p>Acesse de qualquer dispositivo - desktop, tablet ou smartphone.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🚀</div>
+                            <h3>Rápido</h3>
+                            <p>Carregamento ultrarrápido e navegação fluida para melhor experiência.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🎨</div>
+                            <h3>Design Moderno</h3>
+                            <p>Interface bonita, limpa e intuitiva para facilitar sua navegação.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section tech-section">
+                    <div class="section-icon">⚙️</div>
+                    <h2>Tecnologias Utilizadas</h2>
+                    <div class="tech-grid">
+                        <div class="tech-badge">
+                            <span class="tech-icon">🔥</span>
+                            <span>Firebase</span>
+                        </div>
+                        <div class="tech-badge">
+                            <span class="tech-icon">📄</span>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="tech-badge">
+                            <span class="tech-icon">🎨</span>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="tech-badge">
+                            <span class="tech-icon">⚡</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section cta-section">
+                    <div class="section-icon">🤝</div>
+                    <h2>Quer Contribuir?</h2>
+                    <p>A ViniOPédia está em constante crescimento! Se você tem ideias, sugestões ou quer contribuir com artigos, ficaremos felizes em ouvir você.</p>
+                    <div class="cta-buttons">
+                        <button class="btn-primary" id="contribute-btn">
+                            <span class="btn-icon">✍️</span>
+                            Contribuir
+                        </button>
+                        <button class="btn-secondary" id="feedback-btn">
+                            <span class="btn-icon">💬</span>
+                            Dar Feedback
+                        </button>
+                    </div>
+                </section>
+
+                <section class="footer-info">
+                    <p class="version-info">Versão 1.0.0 • Desenvolvido com ❤️</p>
+                    <p class="copyright">© 2025 Vinícius o Mago. Todos os direitos reservados.</p>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div id="feedback-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true" hidden>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Fechar modal">&times;</button>
+            <h3 id="modal-title">Obrigado pelo interesse!</h3>
+            <p>Em breve teremos um sistema completo de contribuições e feedback. Por enquanto, estamos construindo a melhor experiência possível para você! 🚀</p>
+            <button class="btn-primary modal-btn" id="close-modal-btn">Entendido</button>
+        </div>
+    </div>
+
+    <script src="sobre.js"></script>
+</body>
+</html>

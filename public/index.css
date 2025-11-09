@@ -1,11 +1,335 @@
-/* styles.css */
-
-a:hover {
-    text-decoration: underline;
+/* Reset e variáveis CSS */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --bg-color: #ecf0f1;
+    --text-color: #2c3e50;
+    --nav-height: 70px;
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
-img:hover {
-    cursor: pointer;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Acessibilidade - esconder visualmente mas manter para leitores de tela */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Body e estrutura principal */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+#ui {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navegação */
+#above {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-link {
+    text-decoration: none;
+    transition: transform var(--transition-speed) ease;
+}
+
+.logo-link:hover {
     transform: scale(1.05);
-    transition: transform 0.2s;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+}
+
+#logo {
+    height: 50px;
+    width: auto;
+    transition: transform var(--transition-speed) ease;
+}
+
+#logo:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+#about-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--border-radius);
+    transition: all var(--transition-speed) ease;
+    position: relative;
+}
+
+#about-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: all var(--transition-speed) ease;
+    transform: translateX(-50%);
+}
+
+#about-link:hover {
+    color: var(--secondary-color);
+}
+
+#about-link:hover::before {
+    width: 80%;
+}
+
+/* Conteúdo principal */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+}
+
+h1 {
+    color: white;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: fadeInDown 0.8s ease;
+}
+
+main p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    margin-bottom: 2rem;
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+/* Container de pesquisa */
+.search-container {
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+}
+
+/* Barra de pesquisa */
+#search-bar {
+    width: 100%;
+    max-width: 600px;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    background-color: white;
+    box-shadow: var(--shadow);
+    transition: all var(--transition-speed) ease;
+    animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+#search-bar:focus {
+    outline: none;
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+#search-bar::placeholder {
+    color: #95a5a6;
+}
+
+/* Resultados da pesquisa */
+#search-results {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 1.5rem;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    max-height: 400px;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all var(--transition-speed) ease;
+}
+
+#search-results.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#search-results:empty {
+    display: none;
+}
+
+.search-result-item {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #ecf0f1;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background-color: #f8f9fa;
+}
+
+.result-title {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+.result-description {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* Animações */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scrollbar personalizada */
+#search-results::-webkit-scrollbar {
+    width: 8px;
+}
+
+#search-results::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: var(--border-radius);
+}
+
+#search-results::-webkit-scrollbar-thumb {
+    background: #bdc3c7;
+    border-radius: var(--border-radius);
+}
+
+#search-results::-webkit-scrollbar-thumb:hover {
+    background: #95a5a6;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    #above {
+        padding: 0 1rem;
+        height: 60px;
+    }
+
+    #logo {
+        height: 40px;
+    }
+
+    #about-link {
+        font-size: 1rem;
+        padding: 0.4rem 1rem;
+    }
+
+    main {
+        padding: 1.5rem;
+    }
+
+    #search-bar {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #above {
+        padding: 0 0.75rem;
+    }
+
+    #logo {
+        height: 35px;
+    }
+
+    #about-link {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.75rem;
+    }
+}
+
+/* Estados de loading */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Mensagens de erro/vazio */
+.empty-state {
+    padding: 2rem;
+    text-align: center;
+    color: #7f8c8d;
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state-text {
+    font-size: 1rem;
 }

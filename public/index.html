@@ -3,463 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViniOPedia - Enciclopédia Digital</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css"">
+    <meta name="description" content="ViniOPédia - A wikipédia mais aleatória! Explore conteúdos diversos e interessantes.">
+    <meta name="keywords" content="wikipedia, enciclopédia, conhecimento, ViniOPédia">
+    <meta name="author" content="ViniOPédia">
+    <meta name="theme-color" content="#667eea">
     
-    <style>
-        :root {
-            --bg-primary: #000000;
-            --bg-secondary: #0a0a0a;
-            --bg-card: #1a1a1a;
-            --text-primary: #00ff00;
-            --text-secondary: #00cc00;
-            --text-white: #ffffff;
-            --accent-cyan: #00ffff;
-            --accent-purple: #ff00ff;
-            --border-color: #00ff00;
-        }
-
-        body.light-mode {
-            --bg-primary: #f0f0f0;
-            --bg-secondary: #ffffff;
-            --bg-card: #e8e8e8;
-            --text-primary: #008800;
-            --text-secondary: #006600;
-            --text-white: #1a1a1a;
-            --accent-cyan: #0099cc;
-            --accent-purple: #cc00cc;
-            --border-color: #00aa00;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: var(--bg-primary);
-            color: var(--text-white);
-            font-family: 'VT323', monospace;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            transition: background 0.6s ease, color 0.6s ease;
-        }
-
-        /* Efeito Matrix de fundo */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    var(--text-primary) 2px,
-                    var(--text-primary) 3px
-                );
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: 1;
-            animation: scanlines 8s linear infinite;
-        }
-
-        @keyframes scanlines {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(20px); }
-        }
-
-        /* Botão de tema */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 2px solid var(--border-color);
-            padding: 12px 20px;
-            font-family: 'VT323', monospace;
-            font-size: 1.3rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
-        }
-
-        .theme-toggle:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 30px rgba(0, 255, 0, 0.5);
-            background: var(--text-primary);
-            color: var(--bg-primary);
-        }
-
-        /* Header */
-        header {
-            position: relative;
-            z-index: 10;
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 3px solid var(--border-color);
-            background: var(--bg-secondary);
-            box-shadow: 0 5px 30px rgba(0, 255, 0, 0.2);
-        }
-
-        h1 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: clamp(1.5rem, 5vw, 3rem);
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            text-shadow: 
-                0 0 10px var(--text-primary),
-                0 0 20px var(--text-primary),
-                0 0 30px var(--text-primary);
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { 
-                text-shadow: 
-                    0 0 10px var(--text-primary),
-                    0 0 20px var(--text-primary),
-                    0 0 30px var(--text-primary);
-            }
-            50% { 
-                text-shadow: 
-                    0 0 20px var(--text-primary),
-                    0 0 30px var(--text-primary),
-                    0 0 40px var(--text-primary),
-                    0 0 50px var(--text-primary);
-            }
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: var(--accent-cyan);
-            text-decoration: none;
-            font-size: 1.5rem;
-            padding: 10px 20px;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        nav a:hover {
-            color: var(--text-primary);
-            border: 2px solid var(--text-primary);
-            background: rgba(0, 255, 0, 0.1);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 255, 0, 0.3);
-        }
-
-        /* Main */
-        main {
-            position: relative;
-            z-index: 2;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        section {
-            margin-bottom: 80px;
-            padding: 40px;
-            background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            border-radius: 0;
-            box-shadow: 0 10px 40px rgba(0, 255, 0, 0.2);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(0, 255, 0, 0.4);
-        }
-
-        h2 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: clamp(1.2rem, 4vw, 2rem);
-            color: var(--text-primary);
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100px;
-            height: 3px;
-            background: var(--text-primary);
-            box-shadow: 0 0 10px var(--text-primary);
-        }
-
-        p {
-            font-size: 1.5rem;
-            line-height: 1.8;
-            color: var(--text-white);
-            margin-bottom: 20px;
-        }
-
-        /* Articles Grid */
-        .articles {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        article {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border-color);
-            padding: 30px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        article::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent 30%,
-                rgba(0, 255, 0, 0.1) 50%,
-                transparent 70%
-            );
-            transform: rotate(45deg);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        article:hover::before {
-            opacity: 1;
-            animation: shine 1.5s ease-in-out infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        article:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 50px rgba(0, 255, 0, 0.4);
-            border-color: var(--accent-cyan);
-        }
-
-        article h3 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.2rem;
-            color: var(--accent-cyan);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        article p {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-        }
-
-        article img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border: 2px solid var(--border-color);
-            margin-top: 15px;
-            transition: all 0.5s ease;
-            filter: grayscale(0.3) brightness(0.8);
-        }
-
-        article:hover img {
-            filter: grayscale(0) brightness(1);
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.5);
-        }
-
-        /* Footer */
-        footer {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            padding: 30px;
-            background: var(--bg-secondary);
-            border-top: 3px solid var(--border-color);
-            margin-top: 60px;
-        }
-
-        footer p {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-        }
-
-        /* Scroll suave */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .theme-toggle {
-                top: 10px;
-                right: 10px;
-                padding: 10px 15px;
-                font-size: 1.1rem;
-            }
-
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            nav ul {
-                gap: 15px;
-            }
-
-            nav a {
-                font-size: 1.2rem;
-                padding: 8px 15px;
-            }
-
-            section {
-                padding: 25px;
-            }
-
-            .articles {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Efeito de digitação no título */
-        .typing-effect {
-            overflow: hidden;
-            border-right: 3px solid var(--text-primary);
-            white-space: nowrap;
-            animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite;
-            display: inline-block;
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-    </style>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ViniOPédia - A wikipédia mais aleatória!">
+    <meta property="og:description" content="Explore conteúdos diversos e interessantes na ViniOPédia.">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ViniOPédia - A wikipédia mais aleatória!">
+    <meta name="twitter:description" content="Explore conteúdos diversos e interessantes na ViniOPédia.">
+    
+    <title>ViniOPédia - A wikipédia mais aleatória!</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Preconnect para otimização -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="index.css">
+    
+    <!-- Preload de recursos críticos -->
+    <link rel="preload" href="js/index.js" as="script">
 </head>
+
 <body>
-    <!-- Botão de alternância de tema -->
-    <button class="theme-toggle" id="themeToggle">🌙 Terminal</button>
-
-    <header>
-        <h1>ViniOPedia</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Início</a></li>
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#contact">Contato</a></li>
-            </ul>
+    <!-- Container principal -->
+    <div id="ui">
+        <!-- Navegação -->
+        <nav id="above" role="navigation" aria-label="Navegação principal">
+            <a href="index.html" class="logo-link" aria-label="Página inicial da ViniOPédia">
+                <span class="logo-text">ViniOPédia</span>
+            </a>
+            <a id="about-link" href="sobre/" aria-label="Sobre a ViniOPédia">Sobre</a>
         </nav>
-    </header>
 
-    <main>
-        <section id="home">
-            <h2>Início</h2>
-            <p>Explore nossos artigos. Se quiser.</p>
-            <div class="articles">
-                <article>
-                    <h3>Cantinho Paralelo</h3>
-                    <p>Esse artigo categoriza todos os artigos vinculados a ele sobre o Cantinho Paralelo.</p>
-                    <img src="img/cpplr.png" alt="Cantinho Paralelo" onerror="this.style.display='none'"/>
-                </article>
-
-                <article>
-                    <h3>Vinícius o Mago</h3>
-                    <p>Esse artigo fala sobre o criador do site/jogo Vinícius o Mago.</p>
-                    <img src="img/oshawott.jpg" alt="Oshawott - Vinícius" onerror="this.style.display='none'" onclick="alert('Em construção. *som de makita estorano*')""/>
-                </article>
-            </div>
-        </section>
-
-        <section id="about">
-            <h2>Sobre</h2>
-            <p>A ViniOPedia foi criada pelo mesmo criador do site/jogo Vinícius o Mago!</p>
-            <p>Este é um projeto dedicado a documentar e compartilhar conhecimento de forma única e criativa.</p>
-            <p>Com um notebook, e uma IA. Inacréditável né?</p>
-        </section>
-
-        <section id="contact">
-            <h2>Contato</h2>
-            <p>Email: viniciusomagoo@outlook.com</p>
-            <p>Discord: viniciusomagoo</p>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Vinícius o Mago. Todos os direitos reservados.</p>
-        <p style="margin-top: 10px; font-size: 1.1rem;">Desenvolvido com LOV3inf(heart-emoji) por Vinícius o Mago</p>
-    </footer>
-
-    <script>
-        // Alternância de tema
-        const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
-        
-        // Verifica preferência salva
-        const savedTheme = localStorage.getItem('viniopedia-theme');
-        if (savedTheme === 'light') {
-            body.classList.add('light-mode');
-            themeToggle.textContent = '☀️ Terminal';
-        }
-        
-        themeToggle.addEventListener('click', function() {
-            body.classList.toggle('light-mode');
+        <!-- Conteúdo principal -->
+        <main role="main">
+            <h1>Bem-vindo à ViniOPédia!</h1>
+            <p>A wikipédia mais aleatória!</p>
             
-            if (body.classList.contains('light-mode')) {
-                themeToggle.textContent = '☀️ Terminal';
-                localStorage.setItem('viniopedia-theme', 'light');
-                console.log('🌞 Modo claro ativado');
-            } else {
-                themeToggle.textContent = '🌙 Terminal';
-                localStorage.setItem('viniopedia-theme', 'dark');
-                console.log('🌙 Modo escuro ativado');
-            }
-        });
+            <!-- Barra de pesquisa -->
+            <div class="search-container">
+                <label for="search-bar" class="visually-hidden">Campo de pesquisa</label>
+                <input 
+                    type="search" 
+                    id="search-bar" 
+                    placeholder="Pesquisar artigos..."
+                    autocomplete="off"
+                    aria-label="Pesquisar artigos na ViniOPédia"
+                    aria-controls="search-results"
+                    aria-expanded="false"
+                    aria-autocomplete="list"
+                    role="combobox"
+                >
+            </div>
+            
+            <!-- Resultados da pesquisa -->
+            <div 
+                id="search-results" 
+                role="listbox" 
+                aria-label="Resultados da pesquisa"
+            ></div>
+        </main>
+    </div>
 
-        // Easter eggs no console
-        console.log('%c💚 Bem-vindo à ViniOPedia! 💚', 'color: #00ff00; font-size: 20px; font-weight: bold;');
-        console.log('%cVocê encontrou um easter egg!', 'color: #00ffff; font-size: 16px;');
-        
-        // Efeito de digitação no carregamento
-        window.addEventListener('load', function() {
-            console.log('✨ ViniOPedia carregada com sucesso!');
-        });
-    </script>
+    <!-- Firebase SDK -->
+    <script type="module" src="js/firebase.js"></script>
+    
+    <!-- Script principal -->
+    <script src="js/index.js"></script>
+    
+    <!-- Noscript fallback -->
+    <noscript>
+        <div style="padding: 2rem; text-align: center; background: white; margin: 2rem;">
+            <h2>JavaScript necessário</h2>
+            <p>Por favor, habilite o JavaScript no seu navegador para usar a ViniOPédia.</p>
+        </div>
+    </noscript>
 </body>
 </html>

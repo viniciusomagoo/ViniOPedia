@@ -1,2 +1,3 @@
-# ViniOPedia
-Wikipédia própria, que legal.
+# ViniOPédia
+A wikipédia mais aleatória!
+
